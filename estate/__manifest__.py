@@ -6,5 +6,9 @@
     "license": "OEEL-1",
     "depends": ["base"],
     "application": True, # Makes the module an app discoverable in the app store
-    "data": [],
+    "data": [
+        # Security
+        "security/res_groups.xml", 
+    ],
+    "demo": ["demo/demo.xml"],
 }

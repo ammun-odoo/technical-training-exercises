@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+        <record id="house_1" model="estate.property">
+            <field name="name">House 1</field>
+            <field name="description">A description of this lovely house on 123 Wisteria Lane in Santa Cruz, CA.</field>
+            <field name="expected_price">2500000</field>
+        </record>
+    </data>
+</odoo>

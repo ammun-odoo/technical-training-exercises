@@ -9,6 +9,8 @@
     "data": [
         # Security
         "security/res_groups.xml", 
+        # "security/ir.model.access.csv", #<=== ONLY Odoo < 20.0, the latest 20.0 version merged this with rules into ir.access!
+        "security/ir.access.csv",
     ],
     "demo": ["demo/demo.xml"],
 }

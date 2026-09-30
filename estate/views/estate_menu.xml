@@ -1,0 +1,7 @@
+<odoo>
+    <menuitem id="root_property" name="Properties">
+        <menuitem id="top_bar_property" name="Estate">
+            <menuitem id="action_property" name="All Properties" action="test_record"/>
+        </menuitem>
+    </menuitem>
+</odoo>

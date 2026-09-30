@@ -11,6 +11,10 @@
         "security/res_groups.xml", 
         # "security/ir.model.access.csv", #<=== ONLY Odoo < 20.0, the latest 20.0 version merged this with rules into ir.access!
         "security/ir.access.csv",
+        # Views -- Must be defined before menus since you need to call it through the menus
+        "views/estate_property_views.xml",
+        # Menus
+        "views/estate_menu.xml",
     ],
     "demo": ["demo/demo.xml"],
 }

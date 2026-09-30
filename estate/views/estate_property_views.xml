@@ -1,0 +1,9 @@
+<odoo>
+    <!-- Action for property model -->
+    <record id="test_record" model="ir.actions.act_window">
+        <field name="name">Property</field>
+        <field name="res_model">estate.property</field>
+        <!-- tree no longer exists, replacing with list and graph for this exercise. (Only admin can reach forms) -->
+        <field name="view_mode">list,graph,form</field>
+    </record>
+</odoo>

@@ -8,3 +8,5 @@ class PropertyTag(models.Model):
     
     # SQL Constraints
     _unique_property_tag = models.Constraint('UNIQUE(name)', 'Tag name must be unique.')
+
+    color = fields.Integer(default=0)

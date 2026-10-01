@@ -35,7 +35,7 @@
                 <field name="expected_price" string="Expected Price"/>
                 <field name="selling_price" string="Selling Price"/>
                 <field name="date_availability" string="Date Availability"/>
-                <field name="tag_ids" widget="many2many_tags"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
             </list>
         </field>
     </record>
@@ -51,6 +51,7 @@
                     <!-- Not having title set throws warnings, though no errors -->
                     <button string="Sold" name="mark_sold" type="object" title="sold"/>
                     <button string="Cancel" name="mark_canceled" type="object" title="cancel"/>
+                    <field name="state" widget="statusbar" options="{'clickable': True}" statusbar_visible="new,received,accepted,sold"/>
                 </header>
                 <sheet>
                     <!-- Label applies to the group and appears above the name -->
@@ -62,12 +63,11 @@
                         </h1>
                     </group>
                     <group>
-                        <field name="tag_ids" widget="many2many_tags"/>
+                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     </group>
                     <group>
                         <group>
-                            <field name="state" string="Status"/>
-                            <field name="property_type_id" string="Property Type"/>
+                            <field name="property_type_id" string="Property Type" widget="many2one" options="{'no_create_edit': True, 'no_quick_create': True}"/>
                             <field name="postcode"/>
                             <field name="date_availability" string="Date Availability"/>
                         </group>
@@ -86,6 +86,7 @@
                                 <field name="garage"/>
                                 <field name="garden"/>
                                 <field name="garden_area" string="Garden Area"/>
+                                <field name="garden_orientation" string="Garden Orientation" widget="radio"/>
                                 <field name="total_area" string="Total Area"/>
                             </group>
                         </page>
@@ -135,7 +136,7 @@
     <record id="property_tag_record" model="ir.actions.act_window">
         <field name="name">Tags</field>
         <field name="res_model">estate.property.tag</field>
-        <field name="view_mode">list</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <!-- Offers Submenu Action -->

@@ -1,4 +1,5 @@
 from odoo import api, fields, models, exceptions
+from odoo import tools
 
 
 class Property(models.Model):
@@ -122,3 +123,21 @@ class Property(models.Model):
             # mark canceled
             record.state = 'canceled'
         return True
+
+
+    # SQL Constraints
+    _positive_expected_price = models.Constraint('CHECK(expected_price > 0)', 'The expected price cannot be negative.')
+    _positive_selling_price = models.Constraint('CHECK(selling_price >= 0)', 'The selling price cannot be negative.')
+
+
+    # Python Constraints
+    @api.constrains('selling_price', 'expected_price')
+    def _minimum_selling_price(self):
+        for record in self:
+            # Check that the selling price is actually set and we aren't resetting it to 0
+            if not tools.float_is_zero(record.selling_price, 2):
+                # Check that the selling price is at least 90% of the expected
+                # returns -1 if a < b, 0 if ==, 1 if a > b
+                if tools.float_compare(record.selling_price, (record.expected_price * 0.9), 2) < 0:
+                    # Translate string
+                    raise exceptions.ValidationError(self.env._("This selling price is too low. It must be at least 90% of the selling price"))

@@ -64,3 +64,6 @@ class Offer(models.Model):
                 record.property_id.buyer = None
             record.status = 'refused'
         return True
+
+    # SQL Constraints
+    _positive_offer_price = models.Constraint('CHECK(price > 0)', 'An offer must have a positive price.')

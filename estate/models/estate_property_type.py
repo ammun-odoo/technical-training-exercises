@@ -6,3 +6,6 @@ class PropertyType(models.Model):
 
     # fields
     name = fields.Char(required=True)
+
+    # SQL Constraints
+    _unique_property_type = models.Constraint('UNIQUE(name)', 'Property type must have a unique name.')

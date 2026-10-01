@@ -76,3 +76,27 @@ class Property(models.Model):
     def _max_offer(self):
         for record in self:
             record.best_price = max(record.offer_ids.mapped('price')) if (record.offer_ids) else 0
+
+
+    # Onchange methods for the garden
+    @api.onchange('garden')
+    def _onchange_garden_toggle(self):
+        for record in self:
+            if not record.garden:
+                record.garden_area = 0
+                record.garden_orientation = None
+            else:
+                record.garden_area = 10
+                record.garden_orientation = 'north'
+
+    # Raise a warning for if date_availability is in the past
+    @api.onchange('date_availability')
+    def _onchange_date_availability_warning(self):
+        for record in self:
+            if record.date_availability < fields.Date.today():
+                return {
+                    "warning": {
+                        "title": "Availability in Past", 
+                        "message": "The date available is set to prior to today and has already passed."
+                    }
+                }

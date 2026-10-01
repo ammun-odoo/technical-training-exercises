@@ -46,7 +46,12 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="Property">
-                <header></header>
+                <header>
+                    <!-- Sold and Canceled buttons -->
+                    <!-- Not having title set throws warnings, though no errors -->
+                    <button string="Sold" name="mark_sold" type="object" title="sold"/>
+                    <button string="Cancel" name="mark_canceled" type="object" title="cancel"/>
+                </header>
                 <sheet>
                     <!-- Label applies to the group and appears above the name -->
                     <label for="name" string="Name"/>
@@ -61,6 +66,7 @@
                     </group>
                     <group>
                         <group>
+                            <field name="state" string="Status"/>
                             <field name="property_type_id" string="Property Type"/>
                             <field name="postcode"/>
                             <field name="date_availability" string="Date Availability"/>

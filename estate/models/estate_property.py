@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, exceptions
 
 
 class Property(models.Model):
@@ -100,3 +100,25 @@ class Property(models.Model):
                         "message": "The date available is set to prior to today and has already passed."
                     }
                 }
+
+    # Actions/Buttons
+    def mark_sold(self):
+        self.ensure_one()
+        for record in self:
+            # Check its state
+            if record.state == 'canceled':
+                # raise error
+                raise exceptions.UserError("Cannot mark a canceled property as sold.")
+            # mark the property sold
+            record.state = 'sold'
+        return True
+
+    def mark_canceled(self):
+        self.ensure_one()
+        for record in self:
+            # Check state
+            if record.state == 'sold':
+                raise exceptions.UserError("Cannot mark a sold property as canceled.")
+            # mark canceled
+            record.state = 'canceled'
+        return True

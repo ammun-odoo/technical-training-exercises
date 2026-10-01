@@ -11,6 +11,8 @@
                 <field name="partner_id" string="Partner"/>
                 <field name="validity"/>
                 <field name="date_deadline"/>
+                <button name="mark_offer_accept" type="object" icon="check" title="accept"/>
+                <button name="mark_offer_refuse" type="object" icon="close" title="refuse"/>
                 <field name="status"/>
             </list>
         </field>

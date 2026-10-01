@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, exceptions
 
 class Offer(models.Model):
     _name = "estate.property.offer"
@@ -6,7 +6,7 @@ class Offer(models.Model):
 
     # Standard fields
     price = fields.Float()
-    status = fields.Selection(selection=[("accpeted", "Accepted"),("refused", "Refused")], copy=False)
+    status = fields.Selection(selection=[("accepted", "Accepted"),("refused", "Refused")], copy=False)
     
     # Relational Fields
     partner_id = fields.Many2one("res.partner", required=True)
@@ -39,3 +39,28 @@ class Offer(models.Model):
             # .days convertys this to an integer
             record.validity = (record.date_deadline - record.create_date).days
     
+
+    # Offer Actions/Buttons
+
+    def mark_offer_accept(self):
+        self.ensure_one()
+        for record in self:
+            if record.status != 'accepted':
+                # Check if any other offers for this property have status=accepted
+                if 'accepted' in self.property_id.offer_ids.mapped('status'):
+                    raise exceptions.UserError("Cannot accept more than one offer at once.")
+                record.status = 'accepted'
+            record.property_id.selling_price = record.price
+            record.property_id.buyer = record.partner_id
+        return True
+
+    def mark_offer_refuse(self):
+        self.ensure_one()
+        for record in self:
+            # check if accepted so you can reset selling price
+            if record.status == 'accepted':
+                # Need to reference the property itself
+                record.property_id.selling_price = 0
+                record.property_id.buyer = None
+            record.status = 'refused'
+        return True

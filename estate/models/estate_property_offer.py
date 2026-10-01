@@ -1,8 +1,9 @@
-from odoo import api, fields, models, exceptions
+from odoo import api, exceptions, fields, models
 
 class Offer(models.Model):
     _name = "estate.property.offer"
     _description = "offers on a property"
+    _order = "price desc"
 
     # Standard fields
     price = fields.Float()

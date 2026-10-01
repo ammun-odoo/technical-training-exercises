@@ -1,11 +1,12 @@
-from odoo import api, fields, models, exceptions
-from odoo import tools
+from odoo import api, exceptions, fields, models, tools
 
 
 class Property(models.Model):
     # No _description will result in warning
     _name = "estate.property"
     _description = "The estate.property module."
+    # Ordering. Supposed to be ID, but we don't have that field
+    _order = "name desc"
 
     # Shorter text, can be length limited
     # Text is used for multiline text

@@ -19,4 +19,17 @@
             </form>
         </field>
     </record>
+
+    <!-- List view for property types -->
+    <record id="estate_property_type_view_list" model="ir.ui.view">
+        <field name="name">estate_property_type_view_list</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="property_ids"/>
+            </list>
+        </field>
+    </record>
 </odoo>

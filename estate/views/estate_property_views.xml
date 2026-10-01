@@ -1,4 +1,87 @@
 <odoo>
+    <!-- Custom search view for the property model -->
+    <record id="estate_property_view_search" model="ir.ui.view">
+        <field name="name">estate.property.view.search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- new properties on if state == new or received but no others-->
+                <filter string="Available Properties" name="state" domain="['|', ('state', '=', 'new'), ('state', '=', 'received')]"/>
+                <!-- group by postcode -->
+                <filter name="group_by_postcode" context="{'group_by': 'postcode'}"/>
+                <!-- Searchable fields -->
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="expected_price"/>
+                <field name="bedrooms"/>
+                <field name="living_area"/>
+                <field name="facades"/>
+            </search>
+        </field>
+    </record>
+    
+    <!-- Custom list view for the property model -->
+    <record id="estate_property_view_list" model="ir.ui.view">
+        <field name="name">estate.property.view.list</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" string="Title"/>
+                <field name="postcode"/>
+                <field name="bedrooms"/>
+                <field name="living_area" string="Living Area"/>
+                <field name="expected_price" string="Expected Price"/>
+                <field name="selling_price" string="Selling Price"/>
+                <field name="date_availability" string="Date Availability"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Custom form view for the property model -->
+    <record id="estate_property_view_form" model="ir.ui.view">
+        <field name="name">estate.property.view.form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <form string="Property">
+                <header></header>
+                <sheet>
+                    <!-- Label applies to the group and appears above the name -->
+                    <label for="name" string="Name"/>
+                    <group>
+                        <h1>
+                            <!-- Will not have its own label. -->
+                            <field name="name"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="postcode"/>
+                            <field name="date_availability" string="Date Availability"/>
+                        </group>
+                        <group>
+                            <field name="expected_price" string="Expected Price"/>
+                            <field name="selling_price" string="Selling Price"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <group>
+                                <field name="description"/>
+                                <field name="bedrooms"/>
+                                <field name="living_area" string="Living Area"/>
+                                <field name="garage"/>
+                                <field name="garden"/>
+                                <field name="garden_area" string="Garden Area"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACTIONS -->
+
     <!-- Action for property model -->
     <record id="test_record" model="ir.actions.act_window">
         <field name="name">Property</field>

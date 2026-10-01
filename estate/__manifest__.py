@@ -13,6 +13,7 @@
         "security/ir.access.csv",
         # Views -- Must be defined before menus since you need to call it through the menus
         "views/estate_property_views.xml",
+        "views/estate_property_offer_views.xml",
         # Menus
         "views/estate_menu.xml",
     ],

@@ -1,3 +1,9 @@
 id,name,model_id:id,group_id:id,for_read,for_write,for_create,for_unlink
 estate.access_estate_property_admin,access_estate_property_admin,estate.model_estate_property,estate.estate_admin,1,1,1,1
 estate.access_estate_property,access_estate_property,estate.model_estate_property,base.group_user,1,0,0,0
+estate.access_estate_property_type_admin,access_estate_property_type_admin,estate.model_estate_property_type,estate.estate_admin,1,1,1,1
+estate.access_estate_property_type,access_estate_property_type,estate.model_estate_property_type,base.group_user,1,0,0,0
+estate.access_estate_property_offer_admin,access_estate_property_offer_admin,estate.model_estate_property_offer,estate.estate_admin,1,1,1,1
+estate.access_estate_property_offer,access_estate_property_offer,estate.model_estate_property_offer,base.group_user,1,0,0,0
+estate.access_estate_property_tag_admin,access_estate_property_tag_admin,estate.model_estate_property_tag,estate.estate_admin,1,1,1,1
+estate.access_estate_property_tag,access_estate_property_tag,estate.model_estate_property_tag,base.group_user,1,0,0,0

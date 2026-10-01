@@ -9,3 +9,6 @@ class PropertyType(models.Model):
 
     # SQL Constraints
     _unique_property_type = models.Constraint('UNIQUE(name)', 'Property type must have a unique name.')
+
+    # One2many properties
+    property_ids = fields.One2many("estate.property", "property_type_id")

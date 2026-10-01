@@ -57,3 +57,22 @@ class Property(models.Model):
     offer_ids = fields.One2many("estate.property.offer", "property_id")
 
     tag_ids = fields.Many2many("estate.property.tag")
+
+    # Computed Fields
+    
+    # total_area = living_area + garden_area
+    # compute function works out of the "", but only if defined AFTER the method. Putting it in quotes is more syntactically correct
+    total_area = fields.Integer(compute="_get_total_area")
+
+    # Make sure to import api from odoo
+    @api.depends('living_area', 'garden_area')
+    def _get_total_area(self):
+        for record in self:
+            record.total_area = record.living_area + record.garden_area
+
+    best_price = fields.Float(compute="_max_offer")
+
+    @api.depends('offer_ids.price')
+    def _max_offer(self):
+        for record in self:
+            record.best_price = max(record.offer_ids.mapped('price')) if (record.offer_ids) else 0

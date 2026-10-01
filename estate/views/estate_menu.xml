@@ -8,5 +8,9 @@
             <menuitem id="action_property_type" name="Property Types" action="property_type_record"/>
             <menuitem id="action_property_tag" name="Tags" action="property_tag_record"/>
         </menuitem>
+        <!-- Advertisement Menu -->
+        <menuitem id="top_bar_advertisement" name="Advertisement">
+            <menuitem id="action_property_offer" name="Offers" action="property_offer_record"/>
+        </menuitem>
     </menuitem>
 </odoo>

@@ -6,7 +6,9 @@
         <field name="arch" type="xml">
             <search>
                 <!-- new properties on if state == new or received but no others-->
-                <filter string="Available Properties" name="state" domain="['|', ('state', '=', 'new'), ('state', '=', 'received')]"/>
+                <filter string="Available Properties" name="filter_available" 
+                    domain="['|', ('state', '=', 'new'), ('state', '=', 'received')]"
+                />
                 <!-- group by postcode -->
                 <filter name="group_by_postcode" context="{'group_by': 'postcode'}"/>
                 <!-- Searchable fields -->
@@ -15,7 +17,7 @@
                 <field name="postcode"/>
                 <field name="expected_price"/>
                 <field name="bedrooms"/>
-                <field name="living_area"/>
+                <field name="living_area" filter_domain="[('living_area', '>=', self)]"/>
                 <field name="facades"/>
             </search>
         </field>
@@ -169,6 +171,7 @@
         <field name="res_model">estate.property</field>
         <!-- tree no longer exists, replacing with list and graph for this exercise. (Only admin can reach forms) -->
         <field name="view_mode">list,graph,form</field>
+        <field name="context">{'search_default_filter_available': True}</field>
     </record>
 
     <!-- Property Type Submenu Action -->

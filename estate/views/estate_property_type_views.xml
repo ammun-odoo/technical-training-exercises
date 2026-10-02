@@ -5,17 +5,41 @@
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
             <form>
-                <notebook>
-                    <page string="Properties">
-                        <field name="property_ids">
-                            <list>
-                                <field name="name"/>
-                                <field name="expected_price"/>
-                                <field name="state"/>
-                            </list>
-                        </field>
-                    </page>
-                </notebook>
+                <header></header>
+                <sheet>
+                    <!-- Stat button -->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_offer_ids"
+                            type="object"
+                            class="oe_stat_button"
+                            string="Offers"
+                            icon="payments"
+                        >
+                            <!-- This div is for formatting, you can use plain fields here too -->
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Offers</span>
+                                <span class="o_stat_value">
+                                    <!-- Could add widget="line_count" to the field if not in this class -->
+                                    <field name="offer_count" string="Offers"/>
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                    <notebook>
+                        <page string="Properties">
+                            <field name="property_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="expected_price"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
             </form>
         </field>
     </record>
@@ -29,6 +53,7 @@
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="property_ids"/>
+                <field name="offer_count"/>
             </list>
         </field>
     </record>

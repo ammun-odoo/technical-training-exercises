@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import _, api, fields, models
 
 class PropertyType(models.Model):
     _name = "estate.property.type"
@@ -16,7 +16,27 @@ class PropertyType(models.Model):
 
     # One2many properties
     property_ids = fields.One2many("estate.property", "property_type_id")
+    offer_ids = fields.One2many("estate.property.offer", "property_type_id")
 
     # Manual Ordering
     sequence = fields.Integer(default=1)
 
+    # Counter for one2many
+    offer_count = fields.Integer(compute="_property_type_offers")
+
+    @api.depends("offer_ids")
+    def _property_type_offers(self):
+        for record in self:
+            record.offer_count = len(record.offer_ids)
+
+    # Public stat button method
+    def action_open_offer_ids(self):
+        return {
+            "name": _("Offers"),
+            "type": "ir.actions.act_window",
+            "view_mode": "list,form",
+            "res_model": "estate.property.offer",
+            "target": "current",
+            "domain": [('property_type_id', '=', self.id)],
+            "context": {'default_property_type_id': self.id},
+        }

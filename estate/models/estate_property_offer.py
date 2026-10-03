@@ -68,3 +68,23 @@ class Offer(models.Model):
 
     # SQL Constraints
     _positive_offer_price = models.Constraint('CHECK(price > 0)', 'An offer must have a positive price.')
+
+    # Inheritance and CRUD
+    @api.model
+    def create(self, vals):
+        # For each new record
+        for val in vals:
+            # Val will return property_id, an int. Can access property.state as below
+            curr_property = self.env['estate.property'].browse(val['property_id'])
+            
+            # The curr_property.offer_ids return the offer object, not just an int
+            # Check that the offer is not lower than any others for this property
+            if len(curr_property.offer_ids) > 0:
+                min_price = min(curr_property.offer_ids.mapped('price'))
+                if val['price'] < min_price:
+                    raise exceptions.UserError("Cannot submit an offer lower than previous offers.")
+
+            # Update the state for properties without any offers yet, but not those that already have them or are inactive
+            if curr_property.state == 'new':
+                curr_property.state = 'received'
+        return super().create(vals)

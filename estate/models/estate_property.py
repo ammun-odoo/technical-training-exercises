@@ -1,4 +1,4 @@
-from odoo import api, exceptions, fields, models, tools
+from odoo import _, api, exceptions, fields, models, tools
 
 
 class Property(models.Model):
@@ -7,6 +7,8 @@ class Property(models.Model):
     _description = "The estate.property module."
     # Ordering. Supposed to be ID, but we don't have that field
     _order = "name desc"
+
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     # Shorter text, can be length limited
     # Text is used for multiline text
@@ -141,4 +143,13 @@ class Property(models.Model):
                 # returns -1 if a < b, 0 if ==, 1 if a > b
                 if tools.float_compare(record.selling_price, (record.expected_price * 0.9), 2) < 0:
                     # Translate string
-                    raise exceptions.ValidationError(self.env._("This selling price is too low. It must be at least 90% of the selling price"))
+                    raise exceptions.ValidationError(_("This selling price is too low. It must be at least 90% of the selling price"))
+
+    # CRUD/Inheritance Overrides
+    # Cannot delete properties that aren't in new or canceled stated
+    # requires at_uninstall, which determines if this is called when the module itself is being uninstalled. AKA if you want to check this condition then
+    @api.ondelete(at_uninstall=False)
+    def _unlink_property(self):
+        for record in self:
+            if record.state not in {'new', 'canceled'}:
+                raise exceptions.UserError("Cannot delete a property that is not new or canceled.")

@@ -4,7 +4,7 @@
     "summary": """ A test module focused on real estate. """,
     "version": "20.0.0.0.0",
     "license": "OEEL-1",
-    "depends": ["base"],
+    "depends": ["base", "mail"],
     "application": True, # Makes the module an app discoverable in the app store
     "data": [
         # Security
@@ -16,6 +16,7 @@
         "views/estate_property_offer_views.xml",
         "views/estate_property_type_views.xml",
         "views/estate_property_tag_views.xml",
+        "views/res_users_views.xml",
         # Menus
         "views/estate_menu.xml",
     ],

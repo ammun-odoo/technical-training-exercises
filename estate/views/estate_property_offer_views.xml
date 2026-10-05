@@ -4,7 +4,8 @@
         <field name="name">estate.property.offer.view.list</field>
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
-            <list decoration-danger="status == 'refused'" 
+            <list 
+                decoration-danger="status == 'refused'" 
                 decoration-success="status == 'accepted'"
             >
                 <field name="property_id"/>
@@ -13,17 +14,19 @@
                 <field name="partner_id" string="Partner"/>
                 <field name="validity"/>
                 <field name="date_deadline"/>
-                <button name="mark_offer_accept" 
+                <button 
+                    name="action_mark_offer_accept" 
                     type="object" 
-                    icon="check" 
+                    invisible="status"
                     title="accept" 
-                    invisible="status"
+                    icon="check" 
                 />
-                <button name="mark_offer_refuse" 
+                <button 
+                    name="action_mark_offer_refuse" 
                     type="object" 
-                    icon="close" 
-                    title="refuse" 
                     invisible="status"
+                    title="refuse" 
+                    icon="close" 
                 />
                 <field name="status" invisible="1"/>
             </list>
@@ -36,15 +39,18 @@
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
             <form>
-                <group>
-                    <field name="price"/>
-                    <field name="partner_id" string="Partner"/>
-                    <field name="property_id"/>
-                    <field name="property_type_id"/>
-                    <field name="status"/>
-                    <field name="validity"/>
-                    <field name="date_deadline"/>
-                </group>
+                <header/>
+                <sheet>
+                    <group>
+                        <field name="price"/>
+                        <field name="partner_id" string="Partner"/>
+                        <field name="property_id"/>
+                        <field name="property_type_id"/>
+                        <field name="status"/>
+                        <field name="validity"/>
+                        <field name="date_deadline"/>
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>

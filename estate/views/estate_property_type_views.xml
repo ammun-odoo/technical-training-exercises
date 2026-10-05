@@ -1,15 +1,16 @@
 <odoo>
     <!-- Form view for property types -->
     <record id="estate_property_type_view_form" model="ir.ui.view">
-        <field name="name">estate_property_type_view_form</field>
+        <field name="name">estate.property.type.view.form</field>
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
             <form>
-                <header></header>
+                <header/>
                 <sheet>
                     <!-- Stat button -->
-                    <div class="oe_button_box" name="button_box">
-                        <button name="action_open_offer_ids"
+                    <div name="button_box" class="oe_button_box">
+                        <button 
+                            name="action_open_offer_ids"
                             type="object"
                             class="oe_stat_button"
                             string="Offers"
@@ -46,7 +47,7 @@
 
     <!-- List view for property types -->
     <record id="estate_property_type_view_list" model="ir.ui.view">
-        <field name="name">estate_property_type_view_list</field>
+        <field name="name">estate.property.type.view.list</field>
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
             <list>

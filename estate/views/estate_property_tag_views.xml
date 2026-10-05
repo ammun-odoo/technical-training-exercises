@@ -1,12 +1,15 @@
 <odoo>
     <!-- Form view for property tags -->
     <record id="estate_property_tag_view_form" model="ir.ui.view">
-        <field name="name">estate_property_tag_view_form</field>
+        <field name="name">estate.property.tag.view.form</field>
         <field name="model">estate.property.tag</field>
         <field name="arch" type="xml">
             <form>
-                <field name="name"/>
-                <field name="color" widget="color_picker"/>
+                <header/>
+                <sheet>
+                    <field name="name"/>
+                    <field name="color" widget="color_picker"/>
+                </sheet>
             </form>
         </field>
     </record>

@@ -1,16 +1,16 @@
 <odoo>
-    <menuitem id="root_property" name="Properties">
-        <menuitem id="top_bar_property" name="Estate">
-            <menuitem id="action_property" name="All Properties" action="test_record"/>
-        </menuitem>
-        <!-- Settings Menu -->
-        <menuitem id="top_bar_settings" name="Settings">
-            <menuitem id="action_property_type" name="Property Types" action="property_type_record"/>
-            <menuitem id="action_property_tag" name="Tags" action="property_tag_record"/>
+    <menuitem id="estate_property_menu_root" name="Properties">
+        <menuitem id="estate_property_menu_action" name="Estate">
+            <menuitem id="estate_property_menu_open_view" name="All Properties" action="estate_property_open_view"/>
         </menuitem>
         <!-- Advertisement Menu -->
-        <menuitem id="top_bar_advertisement" name="Advertisement">
-            <menuitem id="action_property_offer" name="Offers" action="property_offer_record"/>
+        <menuitem id="estate_property_menu_advertisement_action" name="Advertisement">
+            <menuitem id="estate_property_offer_menu_open_view" name="Offers" action="estate_property_offer_open_view"/>
+        </menuitem>
+        <!-- Settings Menu -->
+        <menuitem id="estate_property_menu_settings_action" name="Settings">
+            <menuitem id="estate_property_type_menu_open_view" name="Property Types" action="estate_property_type_open_view"/>
+            <menuitem id="estate_property_tag_menu_open_view" name="Tags" action="estate_property_tag_open_view"/>
         </menuitem>
     </menuitem>
 </odoo>

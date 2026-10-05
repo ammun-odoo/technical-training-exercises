@@ -6,7 +6,9 @@
         <field name="arch" type="xml">
             <search>
                 <!-- new properties on if state == new or received but no others-->
-                <filter string="Available Properties" name="filter_available" 
+                <filter 
+                    name="filter_available"
+                    string="Available Properties"
                     domain="['|', ('state', '=', 'new'), ('state', '=', 'received')]"
                 />
                 <!-- group by postcode -->
@@ -28,7 +30,8 @@
         <field name="name">estate.property.view.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list decoration-success="state in ('received', 'accepted')" 
+            <list 
+                decoration-success="state in ('received', 'accepted')" 
                 decoration-bf="state == 'accepted'" 
                 decoration-muted="state == 'sold'"
             >
@@ -40,7 +43,8 @@
                 <field name="expected_price" string="Expected Price"/>
                 <field name="selling_price" string="Selling Price"/>
                 <field name="date_availability" string="Date Availability" optional="1"/>
-                <field name="tag_ids" 
+                <field 
+                    name="tag_ids" 
                     widget="many2many_tags" 
                     options="{'color_field': 'color'}" 
                 />
@@ -93,19 +97,22 @@
                 <header>
                     <!-- Sold and Canceled buttons -->
                     <!-- Not having title set throws warnings, though no errors -->
-                    <button string="Sold" 
-                        name="mark_sold" 
+                    <button 
+                        name="action_mark_sold" 
+                        string="Sold"
                         type="object" 
                         title="sold" 
                         invisible="state in ('sold', 'canceled')"
                     />
-                    <button string="Cancel" 
-                        name="mark_canceled" 
+                    <button
+                        name="action_mark_canceled" 
+                        string="Cancel" 
                         type="object" 
                         title="cancel" 
                         invisible="state in ('sold', 'canceled')"
                     />
-                    <field name="state" 
+                    <field 
+                        name="state" 
                         widget="statusbar" 
                         options="{'clickable': True}" 
                         statusbar_visible="new,received,accepted,sold"
@@ -125,7 +132,8 @@
                     </group>
                     <group>
                         <group>
-                            <field name="property_type_id" 
+                            <field 
+                                name="property_type_id" 
                                 string="Property Type" 
                                 widget="many2one" 
                                 options="{'no_create_edit': True, 'no_quick_create': True}"
@@ -147,11 +155,13 @@
                                 <field name="living_area" string="Living Area"/>
                                 <field name="garage"/>
                                 <field name="garden"/>
-                                <field name="garden_area" 
+                                <field 
+                                    name="garden_area" 
                                     string="Garden Area" 
                                     invisible="not garden"
                                 />
-                                <field name="garden_orientation" 
+                                <field 
+                                    name="garden_orientation" 
                                     string="Garden Orientation" 
                                     widget="radio" 
                                     invisible="not garden"
@@ -161,7 +171,8 @@
                         </page>
                         <page string="Offers">
                             <field name="offer_ids" readonly="state in ('accepted','sold','canceled')">
-                                <list editable="bottom" 
+                                <list 
+                                    editable="bottom" 
                                     decoration-danger="status == 'refused'" 
                                     decoration-success="status == 'accepted'"
                                 >
@@ -169,19 +180,21 @@
                                     <field name="partner_id" string="Partner" editable="1"/>
                                     <field name="validity" editable="1"/>
                                     <field name="date_deadline" editable="1"/>
-                                    <button name="mark_offer_accept" 
+                                    <button 
+                                        name="action_mark_offer_accept" 
                                         type="object" 
-                                        icon="check" 
+                                        invisible="status" 
+                                        editable="1"
                                         title="accept" 
-                                        invisible="status" 
-                                        editable="1"
+                                        icon="check"
                                     />
-                                    <button name="mark_offer_refuse" 
+                                    <button 
+                                        name="action_mark_offer_refuse" 
                                         type="object" 
-                                        icon="close" 
-                                        title="refuse" 
                                         invisible="status" 
                                         editable="1"
+                                        title="refuse" 
+                                        icon="close" 
                                     />
                                     <field name="status" editable="1" invisible="not status"/>
                                 </list>
@@ -204,7 +217,7 @@
     <!-- ACTIONS -->
 
     <!-- Action for property model -->
-    <record id="test_record" model="ir.actions.act_window">
+    <record id="estate_property_open_view" model="ir.actions.act_window">
         <field name="name">Property</field>
         <field name="res_model">estate.property</field>
         <!-- tree no longer exists, replacing with list and graph for this exercise. (Only admin can reach forms) -->
@@ -213,21 +226,21 @@
     </record>
 
     <!-- Property Type Submenu Action -->
-    <record id="property_type_record" model="ir.actions.act_window">
+    <record id="estate_property_type_open_view" model="ir.actions.act_window">
         <field name="name">Property Type</field>
         <field name="res_model">estate.property.type</field>
         <field name="view_mode">list,form</field>
     </record>
 
     <!-- Tag Submenu Action -->
-    <record id="property_tag_record" model="ir.actions.act_window">
+    <record id="estate_property_tag_open_view" model="ir.actions.act_window">
         <field name="name">Tags</field>
         <field name="res_model">estate.property.tag</field>
         <field name="view_mode">list,form</field>
     </record>
 
     <!-- Offers Submenu Action -->
-    <record id="property_offer_record" model="ir.actions.act_window">
+    <record id="estate_property_offer_open_view" model="ir.actions.act_window">
         <field name="name">Offers</field>
         <field name="res_model">estate.property.offer</field>
         <field name="view_mode">list,form</field>
